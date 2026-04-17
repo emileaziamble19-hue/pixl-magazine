@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PIXL Magazine — L'Afrique en haute définition. Tech, culture, mode, gastronomie, littérature.">
+<title>PIXL — L'Afrique en haute définition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Outfit:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#0C0C0C;--paper:#F7F4EE;--red:#D42B1E;
+  --gold:#C8952A;--blue:#0E2A6E;--purple:#6B2D8B;
+  --green:#1A6B35;--smoke:#EDEAE3;--muted:#7A7670;
+  --border:rgba(12,12,12,0.12);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.fade-up{animation:fadeUp 0.6s ease both;}
+.fade-up-2{animation:fadeUp 0.6s 0.12s ease both;}
+
+/* TOP BAR */
+.top-bar{background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:36px;font-size:11px;font-weight:500;letter-spacing:0.06em;}
+.top-bar-left{display:flex;align-items:center;gap:20px;}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);display:inline-block;animation:pulse-dot 1.4s ease infinite;}
+.top-bar-right{display:flex;gap:16px;}
+.top-bar-right a{color:rgba(247,244,238,0.55);text-decoration:none;font-size:11px;transition:color 0.15s;cursor:pointer;}
+.top-bar-right a:hover{color:var(--paper);}
+
+/* HEADER */
+header{background:var(--paper);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;}
+.header-main{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2rem;border-bottom:1px solid var(--border);min-height:72px;}
+.header-left{display:flex;align-items:center;gap:16px;}
+.search-btn{background:none;border:none;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background 0.15s;color:var(--ink);}
+.search-btn:hover{background:var(--smoke);}
+.logo-block{text-align:center;}
+.logo-wordmark{font-family:'Bebas Neue',sans-serif;font-size:56px;letter-spacing:4px;line-height:1;color:var(--ink);display:block;cursor:pointer;}
+.logo-wordmark .r{color:var(--red);}
+.logo-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;color:var(--muted);letter-spacing:0.12em;display:block;margin-top:-2px;}
+.header-right{display:flex;align-items:center;justify-content:flex-end;gap:12px;}
+.btn-sub{background:var(--ink);color:var(--paper);font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:9px 18px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.15s;}
+.btn-sub:hover{background:var(--red);}
+
+/* NAV */
+nav{display:flex;justify-content:center;overflow-x:auto;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+.nav-link{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;padding:12px 22px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.15s,border-color 0.15s;user-select:none;}
+.nav-link:hover{color:var(--ink);}
+.nav-link.active{color:var(--ink);border-bottom-color:var(--red);}
+.nav-tv{color:var(--red)!important;font-weight:700!important;}
+
+/* TICKER */
+.ticker{background:var(--red);overflow:hidden;height:30px;display:flex;align-items:center;border-bottom:3px solid var(--ink);}
+.ticker-label{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:var(--paper);background:var(--ink);padding:0 16px;height:100%;display:flex;align-items:center;flex-shrink:0;}
+.ticker-scroll{overflow:hidden;flex:1;}
+.ticker-inner{display:flex;animation:ticker 36s linear infinite;white-space:nowrap;}
+.ticker-inner span{font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--paper);padding-right:60px;}
+.ticker-sep{color:rgba(247,244,238,0.4)!important;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 340px;min-height:560px;border-bottom:3px solid var(--ink);}
+.hero-lead{position:relative;overflow:hidden;border-right:1px solid var(--ink);background:var(--ink);display:flex;flex-direction:column;justify-content:flex-end;padding:2.5rem;min-height:560px;}
+.hero-pattern{position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 28px,rgba(255,255,255,0.025) 28px,rgba(255,255,255,0.025) 29px),linear-gradient(160deg,#101820 0%,#1a0f0a 40%,#0a0e1a 100%);}
+.hero-lead-content{position:relative;z-index:2;}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:var(--paper);font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:4px 10px;margin-bottom:16px;}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.5vw,56px);font-weight:700;line-height:1.08;color:var(--paper);margin-bottom:16px;max-width:620px;}
+.hero-h1 em{font-style:italic;color:#e8c97a;}
+.hero-deck{font-size:15px;font-weight:300;line-height:1.7;color:rgba(247,244,238,0.72);max-width:520px;margin-bottom:22px;}
+.hero-byline{display:flex;align-items:center;gap:12px;font-size:12px;color:rgba(247,244,238,0.45);font-weight:500;letter-spacing:0.04em;}
+.hero-byline::before{content:'';display:inline-block;width:28px;height:1px;background:rgba(247,244,238,0.3);}
+.btn-read{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--paper);border:1px solid rgba(247,244,238,0.35);font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:10px 20px;cursor:pointer;margin-top:18px;transition:background 0.2s,border-color 0.2s;width:fit-content;}
+.btn-read:hover{background:var(--red);border-color:var(--red);}
+.hero-stack{display:flex;flex-direction:column;}
+.stack-item{flex:1;padding:1.4rem 1.5rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;display:flex;flex-direction:column;justify-content:space-between;}
+.stack-item:last-child{border-bottom:none;}
+.stack-item:hover{background:var(--smoke);}
+.stack-cat{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:7px;}
+.cat-tech{color:var(--blue);}.cat-mode{color:var(--gold);}.cat-culture{color:var(--purple);}.cat-gastro{color:var(--green);}.cat-lit{color:var(--red);}
+.stack-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;line-height:1.25;color:var(--ink);margin-bottom:8px;flex:1;}
+.stack-meta{font-size:10px;color:var(--muted);font-weight:500;letter-spacing:0.04em;}
+
+/* SECTION LABEL */
+.sec-head{display:flex;align-items:center;gap:0;margin:0;border-bottom:1px solid var(--border);}
+.sec-name{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--paper);background:var(--ink);padding:8px 20px;white-space:nowrap;}
+.sec-line{flex:1;height:1px;background:var(--border);}
+.sec-more{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:8px 20px;cursor:pointer;transition:color 0.15s;}
+.sec-more:hover{color:var(--red);}
+
+/* ARTICLE GRID */
+.art-grid{display:grid;grid-template-columns:repeat(3,1fr) 280px;border-bottom:3px solid var(--ink);}
+.art-card{padding:1.6rem;border-right:1px solid var(--border);cursor:pointer;transition:background 0.15s;}
+.art-card:hover{background:var(--smoke);}
+.art-img{width:100%;height:130px;margin-bottom:14px;overflow:hidden;position:relative;}
+.art-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.img-tech-bg{background:linear-gradient(135deg,#081428 0%,#0E2A6E 100%);}
+.img-culture-bg{background:linear-gradient(135deg,#1a0828 0%,#6B2D8B 100%);}
+.img-mode-bg{background:linear-gradient(135deg,#281a04 0%,#C8952A 100%);}
+.img-gastro-bg{background:linear-gradient(135deg,#041408 0%,#1A6B35 100%);}
+.img-lit-bg{background:linear-gradient(135deg,#280404 0%,#D42B1E 100%);}
+.img-txt{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:rgba(255,255,255,0.25);}
+.art-cat{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.art-cat::before{content:'';display:inline-block;width:18px;height:1.5px;}
+.art-cat.tech{color:var(--blue);}.art-cat.tech::before{background:var(--blue);}
+.art-cat.culture{color:var(--purple);}.art-cat.culture::before{background:var(--purple);}
+.art-cat.mode{color:var(--gold);}.art-cat.mode::before{background:var(--gold);}
+.art-cat.gastro{color:var(--green);}.art-cat.gastro::before{background:var(--green);}
+.art-cat.lit{color:var(--red);}.art-cat.lit::before{background:var(--red);}
+.art-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;line-height:1.25;margin-bottom:10px;color:var(--ink);}
+.art-deck{font-size:13px;line-height:1.65;color:var(--muted);margin-bottom:12px;}
+.art-meta{font-size:10px;color:#aaa;font-weight:500;letter-spacing:0.04em;}
+
+/* SIDEBAR */
+.sidebar{border-left:1px solid var(--border);display:flex;flex-direction:column;}
+.sidebar-sec{padding:1.4rem;border-bottom:1px solid var(--border);}
+.sidebar-sec:last-child{border-bottom:none;flex:1;}
+.sidebar-sec-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.rank-item{display:flex;gap:10px;margin-bottom:14px;cursor:pointer;}
+.rank-item:last-child{margin-bottom:0;}
+.rank-n{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--border);line-height:1;flex-shrink:0;width:26px;}
+.rank-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;line-height:1.3;color:var(--ink);}
+.rank-meta{font-size:10px;color:var(--muted);margin-top:3px;font-weight:500;}
+.about-box{background:var(--ink);color:var(--paper);padding:1.4rem;}
+.about-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px;margin-bottom:8px;}
+.about-logo .r{color:var(--red);}
+.about-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(247,244,238,0.55);margin-bottom:12px;}
+.about-text{font-size:12px;line-height:1.7;color:rgba(247,244,238,0.65);margin-bottom:12px;}
+.about-origin{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);}
+
+/* DOUBLE SECTION MODE + GASTRO */
+.double-sec{display:grid;grid-template-columns:1fr 1fr;border-bottom:3px solid var(--ink);}
+.half-sec{border-right:1px solid var(--ink);}
+.half-sec:last-child{border-right:none;}
+.half-grid{display:grid;grid-template-columns:1fr 1fr;}
+.half-card{padding:1.4rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;}
+.half-card:nth-child(even){border-right:none;}
+.half-card:nth-last-child(-n+2){border-bottom:none;}
+.half-card:hover{background:var(--smoke);}
+.badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:3px 8px;margin-bottom:10px;}
+.badge-mode{background:var(--gold);color:#fff;}
+.badge-gastro{background:var(--green);color:#fff;}
+.badge-culture{background:var(--purple);color:#fff;}
+.badge-lit{background:var(--red);color:#fff;}
+.badge-tech{background:var(--blue);color:#fff;}
+.half-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;line-height:1.25;color:var(--ink);margin-bottom:8px;}
+.half-deck{font-size:12px;line-height:1.6;color:var(--muted);}
+
+/* CRITIQUE */
+.critique-wrap{display:grid;grid-template-columns:1fr 360px;border-bottom:3px solid var(--ink);}
+.critique-main{padding:2.5rem;border-right:1px solid var(--ink);}
+.critique-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.critique-rule{flex:1;height:1px;background:var(--border);}
+.critique-label{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:var(--muted);}
+.critique-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;line-height:1.15;color:var(--ink);margin-bottom:6px;}
+.critique-author{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--muted);margin-bottom:20px;}
+.critique-body{font-size:15px;line-height:1.8;color:#3a3a3a;margin-bottom:16px;max-width:640px;}
+.note-card{display:flex;align-items:center;gap:20px;background:var(--ink);color:var(--paper);padding:1.4rem 1.8rem;margin-top:20px;width:fit-content;}
+.note-n{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:700;color:var(--red);line-height:1;}
+.note-slash{font-family:'Cormorant Garamond',serif;font-size:28px;color:rgba(247,244,238,0.25);line-height:1;}
+.note-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(247,244,238,0.5);margin-top:4px;}
+.critique-sidebar{padding:2rem;}
+.book-item{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);cursor:pointer;}
+.book-item:first-child{padding-top:0;}
+.book-item:last-child{border-bottom:none;}
+.book-spine{width:6px;height:52px;flex-shrink:0;border-radius:1px;}
+.book-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;line-height:1.3;color:var(--ink);margin-bottom:4px;}
+.book-author{font-size:11px;color:var(--muted);font-weight:500;margin-bottom:4px;}
+.stars{font-size:13px;color:var(--gold);}
+
+/* CULTURE STRIP */
+.culture-strip{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:3px solid var(--ink);}
+.cult-card{padding:1.6rem;border-right:1px solid var(--border);cursor:pointer;transition:background 0.15s;}
+.cult-card:last-child{border-right:none;}
+.cult-card:hover{background:var(--smoke);}
+.cult-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:var(--border);line-height:1;margin-bottom:8px;}
+.cult-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;line-height:1.3;color:var(--ink);margin-bottom:8px;}
+.cult-deck{font-size:12px;line-height:1.6;color:var(--muted);}
+
+/* PIXL TV */
+.tv-band{background:var(--ink);border-bottom:3px solid var(--red);}
+.tv-inner{padding:2.5rem 2rem;}
+.tv-featured{display:grid;grid-template-columns:1fr 340px;gap:0;border-bottom:1px solid rgba(247,244,238,0.08);padding-bottom:2rem;margin-bottom:2rem;}
+.tv-main-player{border-right:1px solid rgba(247,244,238,0.08);padding-right:2rem;}
+.tv-player-wrap{position:relative;width:100%;padding-bottom:56.25%;background:#111;overflow:hidden;margin-bottom:14px;}
+.tv-player-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.tv-player-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f1a2e 0%,#1a0f0e 100%);cursor:pointer;}
+.tv-play-btn{width:64px;height:64px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:14px;transition:transform 0.2s;}
+.tv-play-btn:hover{transform:scale(1.1);}
+.tv-placeholder-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:rgba(247,244,238,0.8);text-align:center;max-width:300px;line-height:1.3;}
+.tv-placeholder-sub{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(247,244,238,0.3);margin-top:8px;}
+.tv-featured-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--paper);line-height:1.25;margin-bottom:8px;}
+.tv-featured-meta{font-size:11px;font-weight:500;color:rgba(247,244,238,0.4);letter-spacing:0.06em;}
+.tv-featured-desc{font-size:13px;font-weight:300;color:rgba(247,244,238,0.6);line-height:1.65;margin-top:8px;}
+.tv-playlist{padding-left:2rem;display:flex;flex-direction:column;}
+.tv-playlist-title{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:rgba(247,244,238,0.3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(247,244,238,0.08);}
+.tv-pl-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(247,244,238,0.06);cursor:pointer;}
+.tv-pl-item:last-child{border-bottom:none;}
+.tv-pl-thumb{width:88px;height:54px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.tv-pl-thumb-inner{width:100%;height:100%;}
+.tv-pl-play{position:absolute;width:24px;height:24px;border-radius:50%;background:rgba(212,43,30,0.85);display:flex;align-items:center;justify-content:center;}
+.tv-pl-info{flex:1;}
+.tv-pl-title{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:700;color:var(--paper);line-height:1.3;margin-bottom:4px;}
+.tv-pl-cat{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;}
+.tv-pl-dur{font-size:10px;color:rgba(247,244,238,0.3);margin-top:2px;font-weight:500;}
+.tv-reels-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.tv-reels-label{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:rgba(247,244,238,0.3);white-space:nowrap;}
+.tv-reels-line{flex:1;height:1px;background:rgba(247,244,238,0.08);}
+.tv-reels{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+.tv-reel{cursor:pointer;transition:transform 0.2s;}
+.tv-reel:hover{transform:translateY(-3px);}
+.tv-reel-thumb{width:100%;aspect-ratio:9/16;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:10px;}
+.tv-reel-play{position:absolute;width:36px;height:36px;border-radius:50%;background:rgba(212,43,30,0.9);display:flex;align-items:center;justify-content:center;}
+.tv-reel-title{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;color:var(--paper);line-height:1.3;margin-bottom:4px;}
+.tv-reel-cat{font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;}
+.tbg1{background:linear-gradient(135deg,#081428,#0E2A6E);}
+.tbg2{background:linear-gradient(135deg,#1a0828,#6B2D8B);}
+.tbg3{background:linear-gradient(135deg,#281a04,#C8952A);}
+.tbg4{background:linear-gradient(135deg,#041408,#1A6B35);}
+.tbg5{background:linear-gradient(135deg,#280404,#D42B1E);}
+
+/* NEWSLETTER */
+.nl-band{display:grid;grid-template-columns:1fr 1fr;background:var(--blue);border-bottom:3px solid var(--ink);}
+.nl-left{padding:3rem 2.5rem;border-right:1px solid rgba(255,255,255,0.1);}
+.nl-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(247,244,238,0.45);display:block;margin-bottom:12px;}
+.nl-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:var(--paper);line-height:1.1;margin-bottom:14px;}
+.nl-title em{font-style:italic;color:var(--gold);}
+.nl-sub{font-size:14px;font-weight:300;line-height:1.7;color:rgba(247,244,238,0.65);margin-bottom:16px;}
+.nl-perks{display:flex;gap:12px;flex-wrap:wrap;}
+.nl-perk{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(247,244,238,0.5);padding:4px 10px;border:1px solid rgba(255,255,255,0.15);}
+.nl-right{padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:center;}
+.nl-form{display:flex;gap:0;margin-bottom:12px;}
+.nl-input{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:var(--paper);font-family:'Outfit',sans-serif;font-size:14px;padding:12px 16px;outline:none;}
+.nl-input::placeholder{color:rgba(247,244,238,0.35);}
+.nl-input:focus{border-color:var(--red);}
+.nl-btn{background:var(--red);color:var(--paper);font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:12px 20px;border:none;cursor:pointer;transition:background 0.15s;white-space:nowrap;}
+.nl-btn:hover{background:#b51f14;}
+.nl-note{font-size:11px;color:rgba(247,244,238,0.35);font-weight:500;}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--paper);}
+.ft-top{display:grid;grid-template-columns:280px 1fr;padding:3rem 2rem;gap:3rem;border-bottom:1px solid rgba(247,244,238,0.06);}
+.ft-brand{display:flex;flex-direction:column;}
+.ft-logo-big{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:4px;line-height:1;margin-bottom:8px;}
+.ft-logo-big .r{color:var(--red);}
+.ft-tagline-ft{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(247,244,238,0.4);margin-bottom:20px;}
+.ft-social{display:flex;gap:10px;}
+.ft-social a{width:34px;height:34px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(247,244,238,0.5);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;text-decoration:none;transition:all 0.15s;}
+.ft-social a:hover{background:var(--red);border-color:var(--red);color:#fff;}
+.ft-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.ft-col h4{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,244,238,0.3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(247,244,238,0.06);}
+.ft-col a{display:block;font-size:12px;color:rgba(247,244,238,0.45);text-decoration:none;margin-bottom:8px;cursor:pointer;transition:color 0.15s;}
+.ft-col a:hover{color:var(--paper);}
+.ft-bottom{padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(247,244,238,0.06);}
+.ft-copy{font-size:11px;color:rgba(247,244,238,0.25);letter-spacing:0.04em;}
+.ft-made{font-size:11px;font-weight:600;color:var(--red);letter-spacing:0.06em;}
+
+/* MODAL ARTICLE */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(12,12,12,0.94);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity 0.3s ease;padding:2rem 1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-content{background:var(--paper);max-width:780px;width:100%;margin:auto;position:relative;}
+.modal-header{padding:3rem 3rem 2rem;border-bottom:1px solid var(--border);}
+.modal-rubrique-tag{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.modal-rubrique-tag::before{content:'';display:inline-block;width:22px;height:1.5px;}
+.modal-rubrique-tag.tech{color:var(--blue);}.modal-rubrique-tag.tech::before{background:var(--blue);}
+.modal-rubrique-tag.culture{color:var(--purple);}.modal-rubrique-tag.culture::before{background:var(--purple);}
+.modal-rubrique-tag.mode{color:var(--gold);}.modal-rubrique-tag.mode::before{background:var(--gold);}
+.modal-rubrique-tag.gastro{color:var(--green);}.modal-rubrique-tag.gastro::before{background:var(--green);}
+.modal-rubrique-tag.lit{color:var(--red);}.modal-rubrique-tag.lit::before{background:var(--red);}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,44px);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:18px;}
+.modal-chapeau{font-size:17px;font-weight:300;line-height:1.72;color:#444;border-left:3px solid var(--red);padding-left:18px;margin-bottom:18px;}
+.modal-meta{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:0.06em;}
+.modal-body{padding:2.5rem 3rem;}
+.modal-body p{font-size:16px;line-height:1.9;color:#2c2c2c;margin-bottom:1.5em;font-family:'Outfit',sans-serif;font-weight:300;}
+.modal-close{position:absolute;top:1rem;right:1rem;width:42px;height:42px;background:var(--ink);border:none;cursor:pointer;color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;transition:background 0.15s;font-family:sans-serif;}
+.modal-close:hover{background:var(--red);}
+.modal-image-band{width:100%;height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.modal-image-label{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:5px;color:rgba(255,255,255,0.2);}
+
+/* VIDE STATE */
+.empty-state{padding:4rem 2rem;text-align:center;color:var(--muted);}
+.empty-state p{font-size:14px;line-height:1.7;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .tv-featured{grid-template-columns:1fr;}
+  .tv-playlist{padding-left:0;padding-top:1.5rem;border-top:1px solid rgba(247,244,238,0.08);}
+  .tv-main-player{border-right:none;padding-right:0;}
+  .tv-reels{grid-template-columns:repeat(3,1fr);}
+  .art-grid{grid-template-columns:1fr 1fr;}
+  .sidebar{display:none;}
+}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;}
+  .hero-stack{flex-direction:row;overflow-x:auto;}
+  .stack-item{min-width:220px;}
+  .art-grid{grid-template-columns:1fr;}
+  .double-sec{grid-template-columns:1fr;}
+  .critique-wrap{grid-template-columns:1fr;}
+  .nl-band{grid-template-columns:1fr;}
+  .ft-top{grid-template-columns:1fr;}
+  .ft-cols{grid-template-columns:1fr 1fr;}
+  .culture-strip{grid-template-columns:1fr 1fr;}
+  .header-main{grid-template-columns:auto 1fr;}
+  .header-left{display:none;}
+  .logo-wordmark{font-size:42px;}
+  .tv-reels{grid-template-columns:repeat(2,1fr);}
+  .modal-header,.modal-body{padding:2rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     🔧  ZONE D'ADMINISTRATION PIXL MAGAZINE
+     ═══════════════════════════════════════════════════════════════════
+     C'est ici que tu gères ton magazine. Tu n'as besoin de toucher
+     QUE ce bloc pour mettre à jour tout le site.
+
+     COMMENT AJOUTER UN ARTICLE :
+     1. Ouvre ce fichier dans un éditeur (VS Code, Notepad++, etc.)
+     2. Descends jusqu'à la section "articles" ci-dessous
+     3. Copie un bloc { id, rubrique, titre... } existant
+     4. Colle-le EN PREMIER dans le tableau (avant les autres)
+     5. Remplis tes informations
+     6. Sauvegarde et ouvre le fichier dans ton navigateur
+
+     RUBRIQUES DISPONIBLES : "tech" | "culture" | "mode" | "gastro" | "lit"
+     ═══════════════════════════════════════════════════════════════════ -->
+<script>
+const PIXL = {
+
+  /* ── CONFIGURATION GÉNÉRALE ─────────────────────────────────────── */
+  config: {
+    youtube_id:  '',                        // ← Ex: 'dQw4w9WgXcQ' (ID de ta vidéo YouTube)
+    email:       'redaction@pixlmag.media', // ← Ton email de rédaction
+    telephone:   '+228 97 74 28 57',        // ← Ton numéro WhatsApp / contact
+    fondateur:   'Émile Aziamble',          // ← Ton nom
+    annee:       '2026',
+    ville:       'Lomé, Togo',
+    instagram:   '#',                       // ← Liens réseaux sociaux
+    twitter:     '#',
+    linkedin:    '#',
+    youtube:     '#',
+  },
+
+  /* ── TICKER (FLASH INFO) ──────────────────────────────────────────
+     Ajoute ou supprime des lignes librement.                        */
+  ticker: [
+    "PIXL Magazine est en ligne — bienvenue sur le premier magazine culturel togolais",
+    "5 rubriques : Tech, Culture, Mode, Gastronomie, Critique littéraire",
+    "Soumettre un article : redaction@pixlmag.media",
+    "Suivez-nous sur les réseaux sociaux @pixlmag",
+    "L'Afrique mérite d'être racontée par ses propres enfants",
+  ],
+
+  /* ── ARTICLES ────────────────────────────────────────────────────
+     Pour ajouter un article : copie un bloc complet de { ... },
+     colle-le AU DÉBUT du tableau, avant le premier article.
+
+     Champs obligatoires :
+       id       → Numéro unique (1, 2, 3...) — toujours +1 par rapport au dernier
+       rubrique → "tech" | "culture" | "mode" | "gastro" | "lit"
+       titre    → Titre de l'article
+       chapeau  → Introduction (2-3 lignes maximum)
+       contenu  → Texte complet (sépare tes paragraphes par une ligne vide)
+       auteur   → Ton nom (ou le nom de l'auteur)
+       date     → Ex: "14 avril 2026"
+       lecture  → Ex: "5 min"
+       hero     → true = article à la une (1 seul à la fois, les autres en false)
+
+     IMPORTANT : Mets hero: true seulement sur TON DERNIER article publié.
+     ──────────────────────────────────────────────────────────────── */
+  articles: [
+    {
+      id: 1,
+      rubrique: "culture",
+      titre: "Pourquoi j'ai créé PIXL : l'Afrique mérite mieux que le silence numérique",
+      chapeau: "L'Afrique est l'un des continents les plus riches du monde sur le plan culturel. Pourtant, dans l'espace numérique francophone, cette richesse reste largement invisible. PIXL est né de ce constat — et de la conviction qu'il fallait faire quelque chose.",
+      contenu: `Je m'appelle Émile Aziamble. J'ai 20 ans, je suis étudiant en journalisme web à l'Université de Lomé, et je vis à Akossombo, dans la capitale togolaise. Ce magazine, c'est le mien. Mais surtout, j'espère qu'il sera le vôtre.
+
+L'idée de PIXL est née d'une frustration simple : chaque jour, je consomme des contenus numériques — articles, vidéos, podcasts, newsletters. Et chaque jour, je réalise que l'Afrique que je connais, l'Afrique que je vis, l'Afrique que j'aime, n'y est presque jamais racontée. Ou alors de loin, avec des lunettes qui ne sont pas les nôtres.
+
+Quand l'Afrique apparaît dans les médias numériques francophones, c'est souvent pour parler de crises, de conflits, de pauvreté. Rarement pour parler de la gastronomie togolaise et de ses saveurs incomparables. Rarement pour parler des créateurs de mode qui travaillent le wax à Lomé avec une maîtrise qui n'a rien à envier aux ateliers parisiens. Rarement pour parler des écrivains africains qui renouvellent la langue française depuis l'intérieur. Rarement pour parler des ingénieurs, des entrepreneurs, des innovateurs qui construisent silencieusement l'Afrique numérique de demain.
+
+PIXL veut combler ce vide. Pas avec des articles bâclés ni des contenus recyclés depuis des sources extérieures. Avec du journalisme sérieux, documenté, écrit par quelqu'un qui vit ici et qui aime profondément ce continent.
+
+Le nom PIXL est une contraction de "pixel" — l'unité de base de tout contenu numérique. Un pixel seul ne dit rien. Mais des milliers de pixels assemblés avec soin créent une image nette, précise, haute définition. C'est exactement ce que nous voulons faire pour l'Afrique : lui donner, article après article, une image à la hauteur de ce qu'elle est.
+
+Ce premier numéro est modeste. Il n'y a que cet édito. Mais chaque grand magazine a commencé par une première page. Revenez : les suivantes arrivent.
+
+Émile Aziamble
+Fondateur, PIXL Magazine
+Lomé, Togo — avril 2026`,
+      auteur: "Émile Aziamble",
+      date: "16 avril 2026",
+      lecture: "4 min",
+      hero: true
+    },
+  ],
+
+  /* ── CRITIQUE LITTÉRAIRE (LA PRINCIPALE) ────────────────────────
+     L'analyse complète d'un livre en rubrique dédiée.              */
+  critique: {
+    badge:        "Coup de coeur",
+    titre:        "Amarante",
+    titre_italic: true,
+    auteur:       "Léonora Miano",
+    editeur:      "Editions de l'Aube, 2026",
+    paragraphes: [
+      "Dans ce roman dense et poétique, Léonora Miano tisse les fils de l'exil, du deuil et de la renaissance africaine avec une maîtrise stylistique rare. Son écriture, à la fois sensorielle et politique, ne laisse aucun répit au lecteur — et c'est exactement ce qu'on lui demande.",
+      "La structure non-linéaire du récit, d'abord déstabilisante, révèle progressivement sa nécessité : chaque fragment temporel est une couche de mémoire collective qui se sédimente. Amarante est une oeuvre qui exige — et qui récompense au centuple."
+    ],
+    note:         "9",
+    note_label:   "Coup de coeur PIXL",
+  },
+
+  /* ── LIVRES EN LIBRAIRIE ─────────────────────────────────────────
+     Ajoute d'autres livres ou modifie les existants.
+     couleur: var(--blue) | var(--red) | var(--green) | var(--gold) | var(--purple) */
+  livres: [
+    { auteur: "Wole Soyinka", titre: "The Archipelago of Souls", editeur: "Penguin Books, 2025", note: "8/10", etoiles: "★★★★☆", couleur: "var(--blue)" },
+    { auteur: "Mohamed Mbougar Sarr", titre: "La Nuit des Possibles", editeur: "Présence Africaine, 2025", note: "10/10", etoiles: "★★★★★", couleur: "var(--red)" },
+    { auteur: "Gaël Faye", titre: "Petit Pays, suite", editeur: "Grasset, 2026", note: "7/10", etoiles: "★★★★☆", couleur: "var(--green)" },
+    { auteur: "Edwidge Danticat", titre: "Mémoires de Port-au-Prince", editeur: "Actes Sud, 2026", note: "6/10", etoiles: "★★★☆☆", couleur: "var(--purple)" },
+  ],
+
+  /* ── PLAYLIST PIXL TV ────────────────────────────────────────────
+     Vidéos à venir sur la chaîne YouTube.
+     bg: "tbg1" (bleu) | "tbg2" (violet) | "tbg3" (or) | "tbg4" (vert) | "tbg5" (rouge) */
+  playlist: [
+    { titre: "Le wax togolais s'invite à Paris Fashion Week", rubrique: "mode", bg: "tbg3", couleur: "var(--gold)" },
+    { titre: "Dans la cuisine des chefs de Lomé", rubrique: "gastro", bg: "tbg4", couleur: "var(--green)" },
+    { titre: "Rencontre avec Alain Mabanckou", rubrique: "lit", bg: "tbg2", couleur: "var(--purple)" },
+    { titre: "Les startups africaines qui changent tout", rubrique: "tech", bg: "tbg1", couleur: "var(--blue)" },
+  ],
+
+  /* ── REELS / SHORTS ──────────────────────────────────────────────*/
+  reels: [
+    { titre: "IA & Journalisme : la révolution", rubrique: "Tech", duree: "60s", bg: "tbg1", couleur: "var(--blue)" },
+    { titre: "Burna Boy en 60 secondes", rubrique: "Culture", duree: "60s", bg: "tbg2", couleur: "var(--purple)" },
+    { titre: "3 looks wax pour l'été", rubrique: "Mode", duree: "45s", bg: "tbg3", couleur: "var(--gold)" },
+    { titre: "Recette : le foutou en 60s", rubrique: "Gastro", duree: "60s", bg: "tbg4", couleur: "var(--green)" },
+    { titre: "Le livre de la semaine", rubrique: "Littérature", duree: "30s", bg: "tbg5", couleur: "var(--red)" },
+  ],
+};
+/* ═══════════════════════════════════════════════════════════════════
+   FIN DE LA ZONE D'ADMINISTRATION — NE PAS MODIFIER EN DESSOUS
+   ═══════════════════════════════════════════════════════════════════ */
+</script>
+
+<!-- ── STRUCTURE DU SITE (ne pas modifier) ── -->
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <span><span class="live-dot"></span>&nbsp; En direct</span>
+    <span id="date-live" style="color:rgba(247,244,238,0.45)"></span>
+  </div>
+  <div class="top-bar-right">
+    <a>À propos</a>
+    <a>Contact</a>
+    <a>Soumettre un article</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-main">
+    <div class="header-left">
+      <button class="search-btn" title="Rechercher">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+    </div>
+    <div class="logo-block fade-up">
+      <span class="logo-wordmark">PIX<span class="r">L</span></span>
+      <span class="logo-tagline">— L'Afrique en haute définition</span>
+    </div>
+    <div class="header-right">
+      <a class="btn-sub" href="#">S'abonner</a>
+    </div>
+  </div>
+  <nav id="main-nav">
+    <span class="nav-link active" data-section="une">À la une</span>
+    <span class="nav-link" data-rubrique="tech">Tech & Numérique</span>
+    <span class="nav-link" data-rubrique="culture">Culture</span>
+    <span class="nav-link" data-rubrique="mode">Mode</span>
+    <span class="nav-link" data-rubrique="gastro">Gastronomie</span>
+    <span class="nav-link" data-rubrique="lit">Critiques</span>
+
+  </nav>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-label">FLASH</div>
+  <div class="ticker-scroll">
+    <div class="ticker-inner" id="ticker-inner"></div>
+  </div>
+</div>
+
+<!-- CONTENU PRINCIPAL (rempli par JS) -->
+<main id="main-content"></main>
+
+<!-- NEWSLETTER -->
+<section class="nl-band">
+  <div class="nl-left">
+    <span class="nl-eyebrow">Newsletter PIXL</span>
+    <div class="nl-title">L'essentiel,<br><em>chaque semaine.</em></div>
+    <div class="nl-sub">Tech, culture, mode, gastronomie et littérature — le meilleur de l'Afrique numérique livré dans votre boîte mail. Gratuit.</div>
+    <div class="nl-perks">
+      <span class="nl-perk">Sans spam</span>
+      <span class="nl-perk">1 email / semaine</span>
+      <span class="nl-perk">Désinscription facile</span>
+    </div>
+  </div>
+  <div class="nl-right">
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="votre@email.com" id="nl-email">
+      <button class="nl-btn" id="nl-submit">S'inscrire →</button>
+    </div>
+    <div class="nl-note" id="nl-note">Soyez parmi les premiers abonnés PIXL.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div class="ft-brand">
+      <div class="ft-logo-big">PIX<span class="r">L</span></div>
+      <div class="ft-tagline-ft">L'Afrique en haute définition</div>
+      <div class="ft-social" id="ft-social"></div>
+    </div>
+    <div class="ft-cols">
+      <div class="ft-col">
+        <h4>Rubriques</h4>
+        <a>Tech & Numérique</a>
+        <a>Culture & Arts</a>
+        <a>Mode africaine</a>
+        <a>Gastronomie</a>
+        <a>Critiques littéraires</a>
+      </div>
+      <div class="ft-col">
+        <h4>Magazine</h4>
+        <a>À propos</a>
+        <a>La rédaction</a>
+        <a>Soumettre un article</a>
+        <a>Portfolio</a>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <a id="ft-email"></a>
+        <a id="ft-phone"></a>
+        <a>Publicité</a>
+        <a>Partenariats</a>
+        <a>Presse</a>
+      </div>
+      <div class="ft-col">
+        <h4>Légal</h4>
+        <a>Mentions légales</a>
+        <a>Confidentialité</a>
+        <a>CGU</a>
+        <a>Newsletter</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy" id="ft-copy"></div>
+    <div class="ft-made" id="ft-made"></div>
+  </div>
+</footer>
+
+<!-- MODALE ARTICLE -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-content" id="modal-content">
+    <button class="modal-close" id="modal-close" aria-label="Fermer">✕</button>
+    <div id="modal-image" class="modal-image-band"></div>
+    <div class="modal-header" id="modal-header"></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     MOTEUR DE RENDU PIXL — NE PAS MODIFIER
+     ═══════════════════════════════════════════════════════════════════ -->
+<script>
+/* ── UTILITAIRES ── */
+const rubriquesLabel = {
+  tech:    'Tech & Numérique',
+  culture: 'Culture & Arts',
+  mode:    'Mode africaine',
+  gastro:  'Gastronomie',
+  lit:     'Critique littéraire',
+};
+const imgBg = {
+  tech:    'img-tech-bg',
+  culture: 'img-culture-bg',
+  mode:    'img-mode-bg',
+  gastro:  'img-gastro-bg',
+  lit:     'img-lit-bg',
+};
+const imgLabel = { tech:'TECH', culture:'CULTURE', mode:'MODE', gastro:'GASTRO', lit:'LITTÉRATURE' };
+
+function svgArrow() {
+  return `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+}
+
+/* ── TICKER ── */
+function buildTicker() {
+  const inner = document.getElementById('ticker-inner');
+  const items = PIXL.ticker;
+  let html = '';
+  // Double pour l'animation seamless
+  for (let i = 0; i < 2; i++) {
+    items.forEach((t, idx) => {
+      html += `<span>${t}</span>`;
+      if (idx < items.length - 1) html += `<span class="ticker-sep">·</span>`;
+    });
+    if (i === 0) html += `<span class="ticker-sep" style="padding-right:60px;"></span>`;
+  }
+  inner.innerHTML = html;
+}
+
+/* ── HERO ── */
+function buildHero(articles) {
+  const hero = articles.find(a => a.hero) || articles[0];
+  const stack = articles.filter(a => !a.hero).slice(0, 4);
+
+  const stackHTML = stack.map(a => `
+    <div class="stack-item" onclick="openModal(${a.id})">
+      <div>
+        <div class="stack-cat cat-${a.rubrique}">${rubriquesLabel[a.rubrique]}</div>
+        <div class="stack-title">${a.titre}</div>
+      </div>
+      <div class="stack-meta">${a.auteur} · ${a.date}</div>
+    </div>
+  `).join('');
+
+  return `
+    <section class="hero">
+      <div class="hero-lead fade-up">
+        <div class="hero-pattern"></div>
+        <div class="hero-lead-content">
+          <div class="hero-kicker">
+            <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="white"/></svg>
+            ${rubriquesLabel[hero.rubrique]}
+          </div>
+          <h1 class="hero-h1">${hero.titre}</h1>
+          <p class="hero-deck">${hero.chapeau}</p>
+          <div class="hero-byline">Par ${hero.auteur} &nbsp;·&nbsp; ${hero.date} &nbsp;·&nbsp; ${hero.lecture} de lecture</div>
+          <button class="btn-read" onclick="openModal(${hero.id})">
+            Lire l'article ${svgArrow()}
+          </button>
+        </div>
+      </div>
+      <div class="hero-stack">
+        ${stackHTML.length ? stackHTML : '<div class="empty-state"><p>Tes prochains articles apparaîtront ici.</p></div>'}
+      </div>
+    </section>
+  `;
+}
+
+/* ── GRILLE D'ARTICLES ── */
+function buildArticleGrid(articles) {
+  const nonHero = articles.filter(a => !a.hero);
+  const grid3   = nonHero.slice(0, 3);
+
+  const cardsHTML = grid3.map(a => `
+    <div class="art-card" onclick="openModal(${a.id})">
+      <div class="art-img">
+        <div class="art-img-inner ${imgBg[a.rubrique]}">
+          <span class="img-txt">${imgLabel[a.rubrique]}</span>
+        </div>
+      </div>
+      <div class="art-cat ${a.rubrique}">${rubriquesLabel[a.rubrique]}</div>
+      <h2 class="art-title">${a.titre}</h2>
+      <p class="art-deck">${a.chapeau}</p>
+      <div class="art-meta">${a.auteur} · ${a.lecture}</div>
+    </div>
+  `).join('');
+
+  const trending = articles.slice(0, 4);
+  const trendHTML = trending.map((a, i) => `
+    <div class="rank-item" onclick="openModal(${a.id})">
+      <div class="rank-n">0${i+1}</div>
+      <div>
+        <div class="rank-title">${a.titre}</div>
+        <div class="rank-meta" style="color:var(--${a.rubrique === 'tech' ? 'blue' : a.rubrique === 'culture' ? 'purple' : a.rubrique === 'mode' ? 'gold' : a.rubrique === 'gastro' ? 'green' : 'red'})">${rubriquesLabel[a.rubrique]}</div>
+      </div>
+    </div>
+  `).join('');
+
+  return `
+    <div class="sec-head">
+      <span class="sec-name">Derniers articles</span>
+      <div class="sec-line"></div>
+      <span class="sec-more">Tous les articles →</span>
+    </div>
+    <section class="art-grid">
+      ${cardsHTML.length ? cardsHTML : '<div class="art-card"><div class="empty-state"><p>Tes articles apparaîtront ici une fois publiés.</p></div></div>'}
+      <div class="sidebar">
+        <div class="sidebar-sec">
+          <div class="sidebar-sec-title">Tendances</div>
+          ${trendHTML}
+        </div>
+        <div class="about-box">
+          <div class="about-logo">PIX<span class="r">L</span></div>
+          <div class="about-tag">L'Afrique en haute définition</div>
+          <div class="about-text">Magazine numérique indépendant fondé à Lomé, Togo. Tech, culture, mode, gastronomie et littérature — couverts avec la précision et l'ambition que l'Afrique mérite.</div>
+          <div class="about-origin">Fondé en ${PIXL.config.annee} · ${PIXL.config.ville}</div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+/* ── MODE & GASTRO ── */
+function buildDoubleSection(articles) {
+  function half(rubrique, label, badgeClass) {
+    const arts = articles.filter(a => a.rubrique === rubrique).slice(0, 4);
+    if (!arts.length) {
+      return `<div class="half-card" style="grid-column:span 2"><div class="empty-state"><p>Ajoute des articles en rubrique "${rubrique}" pour les voir apparaître ici.</p></div></div>`;
+    }
+    return arts.map(a => `
+      <div class="half-card" onclick="openModal(${a.id})">
+        <span class="badge ${badgeClass}">${label}</span>
+        <div class="half-title">${a.titre}</div>
+        <div class="half-deck">${a.chapeau}</div>
+      </div>
+    `).join('');
+  }
+
+  return `
+    <div class="sec-head">
+      <span class="sec-name">Mode & Gastronomie</span>
+      <div class="sec-line"></div>
+      <span class="sec-more">Voir tout →</span>
+    </div>
+    <section class="double-sec">
+      <div class="half-sec">
+        <div class="half-grid">${half('mode','Mode','badge-mode')}</div>
+      </div>
+      <div class="half-sec">
+        <div class="half-grid">${half('gastro','Gastronomie','badge-gastro')}</div>
+      </div>
+    </section>
+  `;
+}
+
+/* ── CRITIQUE LITTÉRAIRE ── */
+function buildCritique() {
+  const c = PIXL.critique;
+  const booksHTML = PIXL.livres.map(b => `
+    <div class="book-item">
+      <div class="book-spine" style="background:${b.couleur}"></div>
+      <div>
+        <div class="book-title">${b.auteur}, <em>${b.titre}</em></div>
+        <div class="book-author">${b.editeur}</div>
+        <div class="stars">${b.etoiles} &nbsp;<span style="font-size:11px;color:var(--muted)">${b.note}</span></div>
+      </div>
+    </div>
+  `).join('');
+
+  const paragraphes = c.paragraphes.map(p => `<p class="critique-body">${p}</p>`).join('');
+
+  return `
+    <div class="sec-head">
+      <span class="sec-name">Critique Littéraire</span>
+      <div class="sec-line"></div>
+      <span class="sec-more">Toutes les critiques →</span>
+    </div>
+    <section class="critique-wrap">
+      <div class="critique-main">
+        <div class="critique-eyebrow">
+          <span class="badge badge-lit">${c.badge}</span>
+          <div class="critique-rule"></div>
+          <span class="critique-label">Critique de la semaine</span>
+        </div>
+        <h2 class="critique-title">${c.titre_italic ? `<em>${c.titre}</em>` : c.titre}</h2>
+        <div class="critique-author">${c.auteur} — ${c.editeur}</div>
+        ${paragraphes}
+        <div class="note-card">
+          <div class="note-n">${c.note}</div>
+          <div class="note-slash">/10</div>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--paper)">${c.note_label}</div>
+            <div class="note-label">Note de la rédaction</div>
+          </div>
+        </div>
+      </div>
+      <div class="critique-sidebar">
+        <div class="sidebar-sec-title" style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)">Aussi en librairie</div>
+        ${booksHTML}
+      </div>
+    </section>
+  `;
+}
+
+/* ── CULTURE STRIP ── */
+function buildCultureStrip(articles) {
+  const culArts = articles.filter(a => a.rubrique === 'culture' || a.rubrique === 'tech').slice(0, 4);
+  if (!culArts.length) return '';
+
+  const html = culArts.map((a, i) => `
+    <div class="cult-card" onclick="openModal(${a.id})">
+      <div class="cult-num">0${i+1}</div>
+      <span class="badge badge-${a.rubrique === 'tech' ? 'tech' : 'culture'}">${rubriquesLabel[a.rubrique]}</span>
+      <div class="cult-title">${a.titre}</div>
+      <div class="cult-deck">${a.chapeau}</div>
+    </div>
+  `).join('');
+
+  return `
+    <div class="sec-head">
+      <span class="sec-name">Culture & Tech</span>
+      <div class="sec-line"></div>
+      <span class="sec-more">Voir tout →</span>
+    </div>
+    <section class="culture-strip">${html}</section>
+  `;
+}
+
+/* ── PIXL TV ── */
+function buildTV() {
+  const vid = PIXL.config.youtube_id;
+  const playerHTML = vid
+    ? `<iframe src="https://www.youtube.com/embed/${vid}?rel=0&modestbranding=1" allowfullscreen></iframe>`
+    : `<div class="tv-player-placeholder">
+        <div class="tv-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="tv-placeholder-title">PIXL Magazine — L'Afrique en haute définition</div>
+        <div class="tv-placeholder-sub">Ajoute ton ID YouTube dans la config</div>
+      </div>`;
+
+  const playlistHTML = PIXL.playlist.map(v => `
+    <div class="tv-pl-item">
+      <div class="tv-pl-thumb">
+        <div class="tv-pl-thumb-inner ${v.bg}"></div>
+        <div class="tv-pl-play"><svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="tv-pl-info">
+        <div class="tv-pl-title">${v.titre}</div>
+        <div class="tv-pl-cat" style="color:${v.couleur}">${v.rubrique.charAt(0).toUpperCase()+v.rubrique.slice(1)}</div>
+        <div class="tv-pl-dur">Bientôt disponible</div>
+      </div>
+    </div>
+  `).join('');
+
+  const reelsHTML = PIXL.reels.map(r => `
+    <div class="tv-reel">
+      <div class="tv-reel-thumb ${r.bg}">
+        <div class="tv-reel-play"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="tv-reel-title">${r.titre}</div>
+      <div class="tv-reel-cat" style="color:${r.couleur}">${r.rubrique} · ${r.duree}</div>
+    </div>
+  `).join('');
+
+  return `
+    <div class="sec-head" id="pixl-tv">
+      <span class="sec-name" style="background:var(--red)">PIXL TV</span>
+      <div class="sec-line"></div>
+      <span class="sec-more">Toutes les vidéos →</span>
+    </div>
+    <section class="tv-band">
+      <div class="tv-inner">
+        <div class="tv-featured">
+          <div class="tv-main-player">
+            <div class="tv-player-wrap">${playerHTML}</div>
+            <div class="tv-featured-title">Comment PIXL redéfinit le journalisme culturel africain</div>
+            <div class="tv-featured-meta">PIXL Originals · Culture & Numérique</div>
+            <div class="tv-featured-desc">Notre vision, notre mission, nos ambitions pour l'espace médiatique africain francophone.</div>
+          </div>
+          <div class="tv-playlist">
+            <div class="tv-playlist-title">À venir sur PIXL TV</div>
+            ${playlistHTML}
+          </div>
+        </div>
+        <div class="tv-reels-head">
+          <span class="tv-reels-label">Shorts & Reels</span>
+          <div class="tv-reels-line"></div>
+        </div>
+        <div class="tv-reels">${reelsHTML}</div>
+      </div>
+    </section>
+  `;
+}
+
+/* ── MODALE ARTICLE ── */
+function openModal(id) {
+  const a = PIXL.articles.find(x => x.id === id);
+  if (!a) return;
+
+  document.getElementById('modal-image').className = `modal-image-band ${imgBg[a.rubrique]}`;
+  document.getElementById('modal-image').innerHTML = `<span class="modal-image-label">${imgLabel[a.rubrique]}</span>`;
+
+  document.getElementById('modal-header').innerHTML = `
+    <div class="modal-rubrique-tag ${a.rubrique}">${rubriquesLabel[a.rubrique]}</div>
+    <h1 class="modal-title">${a.titre}</h1>
+    <p class="modal-chapeau">${a.chapeau}</p>
+    <div class="modal-meta">Par <strong>${a.auteur}</strong> &nbsp;·&nbsp; ${a.date} &nbsp;·&nbsp; ${a.lecture} de lecture</div>
+  `;
+
+  const paras = a.contenu.split(/\n\n+/).filter(p => p.trim());
+  document.getElementById('modal-body').innerHTML = paras.map(p => `<p>${p.trim()}</p>`).join('');
+
+  const overlay = document.getElementById('modal-overlay');
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── FOOTER ── */
+function buildFooter() {
+  const c = PIXL.config;
+  const socials = [
+    { k: 'instagram', l: 'In' },
+    { k: 'twitter',   l: 'X'  },
+    { k: 'linkedin',  l: 'Li' },
+    { k: 'youtube',   l: 'Yt' },
+  ];
+  document.getElementById('ft-social').innerHTML = socials.map(s =>
+    `<a href="${c[s.k]}" title="${s.k}">${s.l}</a>`
+  ).join('');
+  document.getElementById('ft-email').textContent = c.email;
+  document.getElementById('ft-phone').textContent = c.telephone;
+  document.getElementById('ft-copy').textContent = `© ${c.annee} PIXL Magazine · Tous droits réservés · ${c.ville}`;
+  document.getElementById('ft-made').textContent = `Fondé par ${c.fondateur} — Web Journalisme`;
+}
+
+/* ── DATE ── */
+function buildDate() {
+  const d = new Date();
+  document.getElementById('date-live').textContent =
+    d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+
+/* ── NEWSLETTER ── */
+function initNewsletter() {
+  document.getElementById('nl-submit').addEventListener('click', () => {
+    const email = document.getElementById('nl-email').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('nl-note').textContent = 'Veuillez entrer une adresse email valide.';
+      return;
+    }
+    document.getElementById('nl-note').textContent = 'Merci ! Vous êtes inscrit(e) à la newsletter PIXL.';
+    document.getElementById('nl-email').value = '';
+  });
+}
+
+/* ── NAVIGATION ── */
+function initNav() {
+  document.querySelectorAll('.nav-link[data-rubrique]').forEach(el => {
+    el.addEventListener('click', function() {
+      document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+      this.classList.add('active');
+      const rub = this.dataset.rubrique;
+      const arts = PIXL.articles.filter(a => a.rubrique === rub);
+      if (!arts.length) return;
+      // Scroll vers la section correspondante
+      document.getElementById('main-content').scrollIntoView({behavior:'smooth'});
+    });
+  });
+}
+
+/* ── INIT PRINCIPAL ── */
+function init() {
+  buildDate();
+  buildTicker();
+  buildFooter();
+  initNewsletter();
+  initNav();
+
+  const arts = PIXL.articles;
+  const main = document.getElementById('main-content');
+
+  main.innerHTML =
+    buildHero(arts) +
+    buildArticleGrid(arts) +
+    buildDoubleSection(arts) +
+    buildCritique() +
+    buildCultureStrip(arts);
+
+  // Modale — fermeture
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('modal-overlay').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
