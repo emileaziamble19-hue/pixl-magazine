@@ -1,0 +1,71 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/images"
+public_folder: "/images"
+
+locale: fr
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    folder: "src/articles"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - label: "Titre"
+        name: "title"
+        widget: "string"
+        hint: "Le titre de votre article"
+
+      - label: "Rubrique"
+        name: "rubrique"
+        widget: "select"
+        options:
+          - { label: "Tech & Numérique", value: "tech" }
+          - { label: "Culture & Arts", value: "culture" }
+          - { label: "Mode africaine", value: "mode" }
+          - { label: "Gastronomie", value: "gastro" }
+          - { label: "Critique littéraire", value: "lit" }
+
+      - label: "Chapeau (introduction)"
+        name: "chapeau"
+        widget: "text"
+        hint: "2 à 3 lignes qui résument l'article"
+
+      - label: "Contenu de l'article"
+        name: "body"
+        widget: "markdown"
+
+      - label: "Auteur"
+        name: "auteur"
+        widget: "string"
+        default: "Émile Aziamble"
+
+      - label: "Date de publication"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+
+      - label: "Temps de lecture"
+        name: "lecture"
+        widget: "string"
+        default: "5 min"
+        hint: "Ex: 4 min, 8 min"
+
+      - label: "Article à la une ?"
+        name: "hero"
+        widget: "boolean"
+        default: false
+        hint: "Activez ceci pour mettre l'article en page principale. Un seul article à la fois."
+
+      - label: "Image principale"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Optionnel — image de couverture de l'article"

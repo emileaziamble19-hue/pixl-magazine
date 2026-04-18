@@ -1,0 +1,69 @@
+---
+layout: base.njk
+---
+
+{% set rubriquesLabel = {
+  "tech": "Tech & Numérique",
+  "culture": "Culture & Arts",
+  "mode": "Mode africaine",
+  "gastro": "Gastronomie",
+  "lit": "Critique littéraire"
+} %}
+
+<div class="article-wrap">
+  <a href="/" class="back-link">&larr; Retour à l'accueil</a>
+
+  <div class="article-rubrique {{ rubrique }}">{{ rubriquesLabel[rubrique] or rubrique }}</div>
+
+  <h1 class="article-titre">{{ title }}</h1>
+
+  {% if chapeau %}
+  <p class="article-chapeau">{{ chapeau }}</p>
+  {% endif %}
+
+  <div class="article-meta">
+    Par <strong>{{ auteur }}</strong> &nbsp;&middot;&nbsp; {{ date | dateFormat }} &nbsp;&middot;&nbsp; {{ lecture }} de lecture
+  </div>
+
+  {% if image %}
+  <div class="article-cover">
+    <img src="{{ image }}" alt="{{ title }}">
+  </div>
+  {% else %}
+  <div class="article-cover img-{{ rubrique }}-bg" style="display:flex;align-items:center;justify-content:center;">
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:5px;color:rgba(255,255,255,0.2);">{{ rubriquesLabel[rubrique] | upper }}</span>
+  </div>
+  {% endif %}
+
+  <div class="article-body">
+    {{ content | safe }}
+  </div>
+</div>
+
+<!-- ARTICLES SUIVANTS -->
+<div class="sec-head">
+  <span class="sec-name">Lire aussi</span>
+  <div class="sec-line"></div>
+</div>
+<section class="art-grid" style="grid-template-columns:repeat(3,1fr);">
+  {% set rubriquesLabelLocal = {
+    "tech": "Tech & Numérique",
+    "culture": "Culture & Arts",
+    "mode": "Mode africaine",
+    "gastro": "Gastronomie",
+    "lit": "Critique littéraire"
+  } %}
+  {% for art in collections.articles | reverse | limit(3) %}
+  <a class="art-card" href="{{ art.url }}">
+    <div class="art-img">
+      <div class="art-img-inner img-{{ art.data.rubrique }}-bg">
+        <span class="img-txt">{{ art.data.rubrique | upper }}</span>
+      </div>
+    </div>
+    <div class="art-cat {{ art.data.rubrique }}">{{ rubriquesLabelLocal[art.data.rubrique] }}</div>
+    <h2 class="art-title">{{ art.data.title }}</h2>
+    <p class="art-deck">{{ art.data.chapeau }}</p>
+    <div class="art-meta">{{ art.data.auteur }} &middot; {{ art.data.lecture }}</div>
+  </a>
+  {% endfor %}
+</section>

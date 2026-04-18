@@ -1,0 +1,178 @@
+---
+layout: base.njk
+title: "À la une"
+---
+
+{% set heroArticle = collections.articles | reverse | selectattr("data.hero") | first %}
+{% if not heroArticle %}{% set heroArticle = collections.articles | reverse | first %}{% endif %}
+{% set otherArticles = collections.articles | reverse %}
+
+{% set rubriquesLabel = {
+  "tech": "Tech & Numérique",
+  "culture": "Culture & Arts",
+  "mode": "Mode africaine",
+  "gastro": "Gastronomie",
+  "lit": "Critique littéraire"
+} %}
+
+<!-- HERO -->
+{% if heroArticle %}
+<section class="hero">
+  <div class="hero-lead">
+    <div class="hero-pattern"></div>
+    <div class="hero-lead-content fade-up">
+      <div class="hero-kicker">
+        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="white"/></svg>
+        {{ rubriquesLabel[heroArticle.data.rubrique] or heroArticle.data.rubrique }}
+      </div>
+      <h1 class="hero-h1">{{ heroArticle.data.title }}</h1>
+      <p class="hero-deck">{{ heroArticle.data.chapeau }}</p>
+      <div class="hero-byline">Par {{ heroArticle.data.auteur }} &nbsp;&middot;&nbsp; {{ heroArticle.data.date | dateFormat }} &nbsp;&middot;&nbsp; {{ heroArticle.data.lecture }} de lecture</div>
+      <a class="btn-read" href="{{ heroArticle.url }}">Lire l'article &rarr;</a>
+    </div>
+  </div>
+  <div class="hero-stack">
+    {% for art in otherArticles | limit(4) %}
+      {% if art.url != heroArticle.url %}
+      <a class="stack-item" href="{{ art.url }}">
+        <div>
+          <div class="stack-cat cat-{{ art.data.rubrique }}">{{ rubriquesLabel[art.data.rubrique] or art.data.rubrique }}</div>
+          <div class="stack-title">{{ art.data.title }}</div>
+        </div>
+        <div class="stack-meta">{{ art.data.auteur }} &middot; {{ art.data.date | dateFormat }}</div>
+      </a>
+      {% endif %}
+    {% endfor %}
+    {% if collections.articles | length <= 1 %}
+      <div class="stack-item" style="justify-content:center;align-items:center;opacity:0.4;">
+        <div class="stack-title" style="font-size:14px;text-align:center;">Tes prochains articles apparaîtront ici</div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
+<!-- DERNIERS ARTICLES -->
+<div class="sec-head">
+  <span class="sec-name">Derniers articles</span>
+  <div class="sec-line"></div>
+</div>
+
+{% set recentArticles = collections.articles | reverse %}
+{% if recentArticles | length > 0 %}
+<section class="art-grid">
+  {% for art in recentArticles | limit(3) %}
+  <a class="art-card" href="{{ art.url }}">
+    <div class="art-img">
+      <div class="art-img-inner img-{{ art.data.rubrique }}-bg">
+        {% if art.data.image %}
+          <img src="{{ art.data.image }}" alt="{{ art.data.title }}" style="width:100%;height:100%;object-fit:cover;">
+        {% else %}
+          <span class="img-txt">{{ art.data.rubrique | upper }}</span>
+        {% endif %}
+      </div>
+    </div>
+    <div class="art-cat {{ art.data.rubrique }}">{{ rubriquesLabel[art.data.rubrique] or art.data.rubrique }}</div>
+    <h2 class="art-title">{{ art.data.title }}</h2>
+    <p class="art-deck">{{ art.data.chapeau }}</p>
+    <div class="art-meta">{{ art.data.auteur }} &middot; {{ art.data.lecture }}</div>
+  </a>
+  {% endfor %}
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-sec">
+      <div class="sidebar-sec-title">Tendances</div>
+      {% for art in recentArticles | limit(4) %}
+      <a class="rank-item" href="{{ art.url }}">
+        <div class="rank-n">0{{ loop.index }}</div>
+        <div>
+          <div class="rank-title">{{ art.data.title }}</div>
+          <div class="rank-meta" style="color:var(--{{ 'blue' if art.data.rubrique == 'tech' else 'purple' if art.data.rubrique == 'culture' else 'gold' if art.data.rubrique == 'mode' else 'green' if art.data.rubrique == 'gastro' else 'red' }})">
+            {{ rubriquesLabel[art.data.rubrique] or art.data.rubrique }}
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="about-box">
+      <div class="about-logo">PIX<span class="r">L</span></div>
+      <div class="about-tag">L'Afrique en haute définition</div>
+      <div class="about-text">Magazine numérique indépendant fondé à Lomé, Togo. Tech, culture, mode, gastronomie et littérature — couverts avec la précision et l'ambition que l'Afrique mérite.</div>
+      <div class="about-origin">Fondé en {{ site.annee }} &middot; {{ site.ville }}</div>
+    </div>
+  </div>
+</section>
+{% else %}
+<div class="empty-section">
+  <p><strong>Le magazine est en ligne.</strong><br>Les articles publiés depuis le panneau d'administration apparaîtront ici.</p>
+</div>
+{% endif %}
+
+<!-- MODE & GASTRO -->
+{% set modeArts = collections.articles | reverse | selectattr("data.rubrique", "equalto", "mode") %}
+{% set gastroArts = collections.articles | reverse | selectattr("data.rubrique", "equalto", "gastro") %}
+
+{% if (modeArts | list | length > 0) or (gastroArts | list | length > 0) %}
+<div class="sec-head">
+  <span class="sec-name">Mode & Gastronomie</span>
+  <div class="sec-line"></div>
+</div>
+<section class="double-sec">
+  <div class="half-sec">
+    <div class="half-grid">
+      {% for art in modeArts | list | limit(4) %}
+      <a class="half-card" href="{{ art.url }}">
+        <span class="badge badge-mode">Mode</span>
+        <div class="half-title">{{ art.data.title }}</div>
+        <div class="half-deck">{{ art.data.chapeau }}</div>
+      </a>
+      {% else %}
+      <div class="half-card" style="grid-column:span 2;opacity:0.4;">
+        <div class="half-title" style="font-size:14px;">Tes articles Mode apparaîtront ici</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="half-sec">
+    <div class="half-grid">
+      {% for art in gastroArts | list | limit(4) %}
+      <a class="half-card" href="{{ art.url }}">
+        <span class="badge badge-gastro">Gastro</span>
+        <div class="half-title">{{ art.data.title }}</div>
+        <div class="half-deck">{{ art.data.chapeau }}</div>
+      </a>
+      {% else %}
+      <div class="half-card" style="grid-column:span 2;opacity:0.4;">
+        <div class="half-title" style="font-size:14px;">Tes articles Gastronomie apparaîtront ici</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CULTURE & TECH -->
+{% set cultTechArts = [] %}
+{% for art in collections.articles | reverse %}
+  {% if art.data.rubrique == 'culture' or art.data.rubrique == 'tech' %}
+    {% set cultTechArts = (cultTechArts.push(art), cultTechArts) %}
+  {% endif %}
+{% endfor %}
+
+{% if cultTechArts | length > 0 %}
+<div class="sec-head">
+  <span class="sec-name">Culture & Tech</span>
+  <div class="sec-line"></div>
+</div>
+<section class="culture-strip">
+  {% for art in cultTechArts | limit(4) %}
+  <a class="cult-card" href="{{ art.url }}">
+    <div class="cult-num">0{{ loop.index }}</div>
+    <span class="badge badge-{{ art.data.rubrique }}">{{ rubriquesLabel[art.data.rubrique] or art.data.rubrique }}</span>
+    <div class="cult-title">{{ art.data.title }}</div>
+    <div class="cult-deck">{{ art.data.chapeau }}</div>
+  </a>
+  {% endfor %}
+</section>
+{% endif %}
